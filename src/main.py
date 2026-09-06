@@ -31,7 +31,7 @@ def extract_times(content):
 
 def extract_phone_numbers(content):
     #This regex checks for a phone number with these creteria: it must must start with a +, then the following number should between 1 to 9 because there is no country code of 0, then there is an optional whitespace, then what follows allows to use braces to format the phone number's region between 1 to 3 digits, then the rest are digits that can have spaces between them, ad they must not exceed 14 but not less than 6 to be inclusive for all countries
-    phone_pattern = r"^\+[1-9]{1,3}\s?(\([0-9]{1,3}\))?(\s?\d){6,14}$"
+    phone_pattern = r"\+[1-9]{1,3}\s?(?:\([0-9]{1,3}\))?(?:\s?\d){6,14}\."
     return re.findall(phone_pattern, content, re.MULTILINE)
 
 
