@@ -40,6 +40,11 @@ def extract_credit_cards(content):
     credit_card_pattern = r"\d{4}\-?\s?\d{4}\-?\s?\d{4}\-?\s?\d{4}\-?\s?"
     return re.findall(credit_card_pattern, content)
 
+#This funtions takes a card number, removes everything else except the card numbers, and the replaces all the digits with *s except for the last four. This is done to hide senstive info
+def hide_credit_card(card_number):
+    digits = re.sub(r"\D", "", card_number)
+    return "*" * (len(digits) - 4) + digits[-4:]
+
 
 input_path = "input/raw-text.txt"
 output_path = "output/sample-output.json"
@@ -53,7 +58,7 @@ results = {
     "locations": extract_locations(content),
     "times": extract_times(content),
     "phone_numbers": extract_phone_numbers(content),
-    "credit_cards": extract_credit_cards(content),
+    "credit_cards": [hide_credit_card(cc) for cc in extract_credit_cards(content)],
 }
 
 for key, values in results.items():
