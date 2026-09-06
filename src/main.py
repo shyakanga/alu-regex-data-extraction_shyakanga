@@ -4,7 +4,7 @@ import os
 
 
 def extract_emails(content):
-    email_pattern = fr"\w*\.\w*@alueducation|alumni.alueducation|si.alueducation.com"
+    email_pattern = r"\w+-?\.?[a-z0-9]+?-?[0-9]?\.?[A-Za-z0-9]?@\w+-?(?:[\.?\w+-?]+)?[A-Za-z+][0-9]?"
     return re.findall(email_pattern, content, re.MULTILINE)
 
 
